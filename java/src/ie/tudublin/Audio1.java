@@ -46,57 +46,64 @@ public class Audio1 extends PApplet
         // Uncomment this to use the microphone
         // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
         // ab = ai.mix; 
-
+    
         // And comment the next two lines out
         ap = minim.loadFile("heroplanet.mp3", 1024);
         ap.play();
         ab = ap.mix;
         colorMode(HSB);
-
+    
         y = height / 2;
         smoothedY = y;
-
+    
+        // Initialize the array to the same size as the audio buffer
+        lerpedBuffer = new float[ab.size()];
+    
+        for (int i = 0; i < ab.size(); i++) {
+            lerpedBuffer[i] = 0;
+        }
     }
-
-    float off = 0;
-
+    
+    float[] lerpedBuffer;
+    
     public void draw()
     {
         //background(0);
         float halfH = height / 2;
         float average = 0;
         float sum = 0;
-        off += 1;
         // Calculate sum and average of the samples
         // Also lerp each element of buffer;
         for(int i = 0 ; i < ab.size() ; i ++)
         {
-            sum += abs(ab.get(i));
+            lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+            sum += abs(lerpedBuffer[i]);
         }
         average= sum / (float) ab.size();
-
+    
         smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
-        
+    
         float cx = width / 2;
         float cy = height / 2;
-
+    
         switch (mode) {
-			case 0:
+            case 0:
                 background(0);
                 for(int i = 0 ; i < ab.size() ; i ++)
                 {
                     //float c = map(ab.get(i), -1, 1, 0, 255);
                     float c = map(i, 0, ab.size(), 0, 255);
                     stroke(c, 255, 255);
-                    float f = ab.get(i) * halfH;
+                    float f = lerpedBuffer[i] * halfH;
                     line(i, halfH + f, i, halfH - f);                    
                 }
                 break;
-        case 1:
-            background(0);            
-            break;
-
+            case 1:
+                background(0);            
+                break;
         }
+    }
+    
         
 
 
@@ -115,4 +122,5 @@ public class Audio1 extends PApplet
         */
 
     }        
-}
+
+
