@@ -100,7 +100,13 @@ public class Audio1 extends PApplet {
                     line(width - (halfW - x1), halfHeight, width - (halfW - x2), halfHeight - y2);
                 }
                 break;
-            
+            case 3:
+                background(0);
+                noStroke();
+                fill(255, 255, 255, 100);
+                float size = map(smoothedAmplitude, 0, 1, 0, height);
+                ellipse(width / 2f, height / 2f, size, size);
+                break;
             }
             
             
