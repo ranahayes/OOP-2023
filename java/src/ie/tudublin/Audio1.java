@@ -115,6 +115,21 @@ public class Audio1 extends PApplet {
                 rectMode(CENTER);
                 rect(width / 2f, height / 2f, size2, size2);
                 break;
+            case 5:
+                background(0);
+                for (int i = 0; i < ab.size(); i += 10) {
+                    float c = random(255);
+                    stroke(c, 255, 255);
+                    float z = map(i, 0, ab.size(), 0, width);
+                    float y = random(height);
+                    float r = abs(lerpedBuffer[i]) * 100;
+                    point(z, y, r);
+                }
+                break;
+            
+            
+
+            
             }
             
             
