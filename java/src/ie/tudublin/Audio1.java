@@ -107,7 +107,16 @@ public class Audio1 extends PApplet {
                 float size = map(smoothedAmplitude, 0, 1, 0, height);
                 ellipse(width / 2f, height / 2f, size, size);
                 break;
+            case 4:
+                background(0);
+                noStroke();
+                fill(255, 255, 255, 100);
+                float size2 = map(smoothedAmplitude, 0, 1, 0, height);
+                rectMode(CENTER);
+                rect(width / 2f, height / 2f, size2, size2);
+                break;
             }
+            
             
             
         }
