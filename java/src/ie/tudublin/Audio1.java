@@ -15,7 +15,7 @@ public class Audio1 extends PApplet {
     float smoothedAmplitude = 0;
 
     public void keyPressed() {
-        if (key >= '0' && key <= '9') {
+        if (key >= '0' && key <= '5') {
             mode = key - '0';
         }
         if (keyCode == ' ') {
@@ -76,6 +76,13 @@ public class Audio1 extends PApplet {
                 break;
             case 1:
                 background(0);
+                float x = 0;
+                float dx = (float) width / (float) ab.size();
+                for (int i = 0; i < ab.size(); i++) {
+                    float y = map(ab.get(i), -1, 1, height, 0);
+                    line(x, y, x + dx, y);
+                    x += dx;
+                }
                 break;
         }
     }
