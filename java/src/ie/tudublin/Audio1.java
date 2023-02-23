@@ -84,6 +84,25 @@ public class Audio1 extends PApplet {
                     x += dx;
                 }
                 break;
+            case 2:
+                background(0);
+                float halfW = width / 2;
+                float halfHeight = height / 2;
+                for (int i = 0; i < ab.size() - 1; i++) {
+                    stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
+                    float x1 = map(i, 0, ab.size(), 0, halfW);
+                    float x2 = map(i + 1, 0, ab.size(), 0, halfW);
+                    float y1 = halfHeight - lerpedBuffer[i] * halfHeight;
+                    float y2 = halfHeight - lerpedBuffer[i + 1] * halfHeight;
+                    line(x1, y1, x2, y2);
+                    line(x1, height - y1, x2, height - y2);
+                    line(halfW - x1, halfHeight, halfW - x2, halfHeight - y2);
+                    line(width - (halfW - x1), halfHeight, width - (halfW - x2), halfHeight - y2);
+                }
+                break;
+            
+            }
+            
+            
         }
     }
-}
